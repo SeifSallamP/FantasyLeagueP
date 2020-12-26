@@ -1,18 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- *
- * @author dell
- */
 public class Database {
     
     File databaseFolder = new File("Database");
@@ -35,10 +25,13 @@ public class Database {
     
     }
     public void addSquadPlayerDatabase(Squad squad, Player player, File SquadPlayersFile) throws IOException{  
-          BufferedWriter br = new BufferedWriter(new FileWriter(SquadPlayersFile));
-          br.append("Name: " + player.Name +"\r\nNationality: " + player.Nationality + "\r\nClub: " + player.Club + "\r\nPosition: " + player.Position + "\r\nPrice: " + player.Price + "\r\nYellow Card: " + player.YellowCard + "\r\nRed Card: " + player.RedCard).flush();
+          BufferedWriter br = new BufferedWriter(new FileWriter(SquadPlayersFile, true));
+          br.append("Name: " + player.Name +"\r\nNationality: " + player.Nationality + "\r\nClub: " + player.Club + "\r\nPosition: " + player.Position + "\r\nPrice: " + player.Price + "\r\nYellow Card: " + player.YellowCard + "\r\nRed Card: " + player.RedCard + "\r\n").flush();
           br.close();
-    
+          br = new BufferedWriter(new FileWriter(squad.SquadBudget, false));
+          squad.squadBudget-=player.Price;
+          br.append(String.valueOf(squad.squadBudget)).flush();
+          br.close();
     }
     public void addLeague(){};
     public void removeLeague(){};
