@@ -9,7 +9,8 @@ public class RedCardAction implements CardsActions {
     public void giveCard(String playerName) {
         score = cardValue;
         try {
-            gwbe.scoreWriter(playerName, "Score: ", score);
+            gwbe.pointsWriter(playerName, "Total Points: ", score);
+            gwbe.pointsWriter(playerName, "Red Cards: ", 1);
         } catch (IOException ex) {
             Logger.getLogger(RedCardAction.class.getName()).log(Level.SEVERE, null, ex);
         }

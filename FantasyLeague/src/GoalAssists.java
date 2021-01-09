@@ -11,7 +11,8 @@ public class GoalAssists {
     void assistedGoal(String playerName){
         score = assistValue;
         try {
-            gwbe.scoreWriter(playerName, "Score: ", score);
+            gwbe.pointsWriter(playerName, "Total Points: ", score);
+            gwbe.pointsWriter(playerName, "Assists: ", 1);
         } catch (IOException ex) {
             Logger.getLogger(GoalAssists.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -19,7 +20,7 @@ public class GoalAssists {
     void assistGoal(String playerName, int goals){
         score=  assistValue * goals;
         try {
-            gwbe.scoreWriter(playerName, "Score: ", score);
+            gwbe.pointsWriter(playerName, "Assists: ", goals);
         } catch (IOException ex) {
             Logger.getLogger(GoalAssists.class.getName()).log(Level.SEVERE, null, ex);
         }

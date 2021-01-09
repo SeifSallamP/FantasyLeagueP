@@ -10,7 +10,8 @@ public class MidCleanSheet implements CleanSheet {
     public void cleanSheet(String playerName) {
         score = cleanSheetValue;
         try {
-            gwbe.scoreWriter(playerName, "Score: ", score);
+            gwbe.pointsWriter(playerName, "Total Points: ", score);
+            gwbe.pointsWriter(playerName, "Clean Sheets: ", 1);
         } catch (IOException ex) {
             Logger.getLogger(YellowCardAction.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -10,11 +10,13 @@ public class PenaltySaved extends PenaltyAction {
         }
         void savePenalty(String playerName) throws IOException{
             score = penaltyValue;
-            gwbe.scoreWriter(playerName, "Score: ", score);
+            gwbe.pointsWriter(playerName, "Total Points: ", score);
+            gwbe.pointsWriter(playerName, "Saved Penalties: ", 1);
         }
         void savePenalty(String playerName, int penalties) throws IOException{
             score = penaltyValue * penalties;
-            gwbe.scoreWriter(playerName, "Score: ", score);
+            gwbe.pointsWriter(playerName, "Total Points: ", score);
+            gwbe.pointsWriter(playerName, "Saved Penalties: ", penalties);
         }
   public static void main(String[] args) throws IOException{
       PenaltySaved ps = new PenaltySaved();
