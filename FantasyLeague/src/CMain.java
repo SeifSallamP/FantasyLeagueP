@@ -1,6 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 import java.io.*;
 import java.util.*;
-
+/**
+ *
+ * @author dell
+ */
 public class CMain {
 
     public static void main(String[] args) {
@@ -60,7 +68,6 @@ public class CMain {
                                     System.out.println("Enter player's price: ");
                                     double playerPrice = scan.nextDouble();
                                     scan.nextLine();
-
                                     PlayerController pc = new PlayerController();
                                     pc.addPlayer(playerName, playerNationality, playerClub, playerPosition, playerPrice);
                                     break;

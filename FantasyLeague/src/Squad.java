@@ -1,4 +1,3 @@
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,10 +6,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-
 public class Squad {
 	ArrayList<Player> playerList = new ArrayList<Player>();
-
         double squadBudget;
         File SquadPlayersFile;
         File SquadBudget;
@@ -36,7 +33,6 @@ public class Squad {
                 scan.close();
                 
             }
-
 
         }
 }
