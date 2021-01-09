@@ -9,15 +9,25 @@ import java.util.Scanner;
 public class Squad {
 	ArrayList<Player> playerList = new ArrayList<Player>();
         double squadBudget;
+        File squadsFolder;
         File SquadPlayersFile;
         File SquadBudget;
         Squad(){}
-        Squad(String path, String budgetPath) throws IOException{
-            if (!new File(path).isFile()){
-                SquadPlayersFile = new File(path);
+        Squad(String squadsFolderPath){
+            if (!new File(squadsFolderPath).isDirectory()){
+                squadsFolder = new File(squadsFolderPath);
+                squadsFolder.mkdir();
+            }
+            else {
+                squadsFolder = new File(squadsFolderPath);
+            }
+        }
+        Squad(String squadListPath, String budgetPath) throws IOException{
+            if (!new File(squadListPath).isFile()){
+                SquadPlayersFile = new File(squadListPath);
                 SquadPlayersFile.createNewFile();
                 
-            }else SquadPlayersFile = new File(path);
+            }else SquadPlayersFile = new File(squadListPath);
             if (!new File(budgetPath).isFile()){
                 SquadBudget = new File(budgetPath);
                 SquadBudget.createNewFile();

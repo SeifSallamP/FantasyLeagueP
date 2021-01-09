@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.io.*;
 import java.util.*;
-/**
- *
- * @author dell
- */
+
 public class CMain {
 
     public static void main(String[] args) {
@@ -74,7 +66,7 @@ public class CMain {
                                 case "2":
                                     System.out.println("Squad player to be added: ");
                                     String playerName__ = scan.nextLine();
-                                    currentuser.squadcontroller.addPlayer(currentuser.squadcontroller.selectSquadPlayer(playerName__));
+                                    currentuser.squadController.addPlayer(currentuser.squadController.selectSquadPlayer(playerName__));
                                     break;
                                 case "3": flag = false; break;
                                 default:

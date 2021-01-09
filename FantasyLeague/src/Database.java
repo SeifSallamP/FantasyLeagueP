@@ -1,18 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- *
- * @author dell
- */
 public class Database {
     
     File databaseFolder = new File("Database");
@@ -51,6 +41,8 @@ public class Database {
         userInfoFolder.mkdir();
         File userFile = new File(userInfoFolder.getAbsolutePath() + File.separator + "INFO.txt");
         userFile.createNewFile();
+        File squadsFolder = new File(usersFolder.getAbsolutePath() + File.separator + user.getEmail() + File.separator + "Squads");
+        squadsFolder.mkdir();
         BufferedWriter br = new BufferedWriter(new FileWriter(userFile));
         br.append("Email: " + user.getEmail() +"\r\nPassword: " + user.getPassword() + "\r\nFirst Name: " + user.getFirstName() + "\r\nLast Name: " + user.getLastName() + "\r\nFavourite Club: " + user.getFavouriteClub()).flush();
         br.close();
