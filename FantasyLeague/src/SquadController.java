@@ -123,5 +123,8 @@ public class SquadController {
         System.out.println("Squad can't exceed 15 players");
         }
     }
-    
+    public static void main(String[] args) throws IOException{
+        SquadController sc = new SquadController(new File("Database" + File.separator + "Users" + File.separator + "mromar4"));
+        sc.createSquad("Bateekh");
+    }   
 }

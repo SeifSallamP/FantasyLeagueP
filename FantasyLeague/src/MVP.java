@@ -19,7 +19,8 @@ public class MVP{
     void rewardMVP(String playerName, int bonus){
         score = bp.addBonus(bonus);
         try {
-            gwbe.scoreWriter("Cristiano Ronaldo", "Score: ", score);
+            gwbe.pointsWriter(playerName, "Total Points: ", score);
+            gwbe.pointsWriter(playerName, "MVP: ", 1);
         } catch (IOException ex) {
             Logger.getLogger(MVP.class.getName()).log(Level.SEVERE, null, ex);
         }

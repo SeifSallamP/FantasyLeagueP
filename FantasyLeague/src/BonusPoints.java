@@ -11,7 +11,8 @@ public class BonusPoints {
     };
     void addBonus(String playerName, int bonusPoints){
         try {
-            gwbe.scoreWriter(playerName, "Score: ", bonusPoints);
+            gwbe.pointsWriter(playerName, "Total Points: ", bonusPoints);
+            gwbe.pointsWriter(playerName, "Bonus Points: ", bonusPoints);
         } catch (IOException ex) {
             Logger.getLogger(BonusPoints.class.getName()).log(Level.SEVERE, null, ex);
         }

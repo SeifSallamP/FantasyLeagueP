@@ -11,7 +11,8 @@ public class AttScores implements ScoredGoals {
     public void scoreGoals(String playerName, int goals) {
         score = goalValue * goals;
         try {
-            gwbe.scoreWriter(playerName, "Score: ", score);
+            gwbe.pointsWriter(playerName, "Total Points: ", score);
+            gwbe.pointsWriter(playerName, "Goals: ", goals);
         } catch (IOException ex) {
             Logger.getLogger(MidScores.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -20,7 +21,8 @@ public class AttScores implements ScoredGoals {
     public void scoreGoal(String playerName) {
           score = goalValue;
           try {
-            gwbe.scoreWriter(playerName, "Score: ", score);
+            gwbe.pointsWriter(playerName, "Total Points: ", score);
+            gwbe.pointsWriter(playerName, "Goals: ", 1);
         } catch (IOException ex) {
             Logger.getLogger(MidScores.class.getName()).log(Level.SEVERE, null, ex);
         }
