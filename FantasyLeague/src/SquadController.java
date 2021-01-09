@@ -8,22 +8,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author dell
- */
 public class SquadController {
+    File squadsFolder;
     Squad squad;
     FileLinesMethods linesMethods = new FileLinesMethods();
     SquadController(){};
+    SquadController(File squadsFolder){this.squadsFolder = squadsFolder;}
     SquadController(Squad squad){this.squad = squad;}
     //Squad createSquad(){Squad newSquad = new Squad(); squad = newSquad; return newSquad;}
+    void createSquad(String squadName) throws IOException{
+        File squadFolder = new File(squadsFolder.getAbsolutePath() + File.separator + squadName);
+        squadFolder.mkdir();
+        Squad newSquad = new Squad(squadsFolder.getAbsolutePath() + File.separator + squadName + File.separator + "Squad List.txt", squadsFolder.getAbsolutePath() + File.separator + squadName + File.separator + "Budget.txt");
+    }
+    void selectSquad(String squadName) throws IOException{
+        if (! new File(squadsFolder.getAbsolutePath() + File.separator + squadName).isDirectory()){
+            System.out.println("Squad doesn't exist");
+            return;
+        }
+        else {
+            Squad selectedSquad = new Squad(squadsFolder.getAbsolutePath() + File.separator + squadName + File.separator + "Squad List.txt", squadsFolder.getAbsolutePath() + File.separator + squadName + File.separator + "Budget.txt");
+            this.squad = selectedSquad;
+        }
+    }
     public Player selectSquadPlayer(String playerName) throws FileNotFoundException, IOException{
         Database db = new Database();
         File playerFile = new File(db.playersFolder.getAbsolutePath() + File.separator + playerName + ".txt");
@@ -33,42 +40,42 @@ public class SquadController {
         Player player = new Player();
         while(input.hasNextLine()){
             lineCount++;
-           	if (lineCount==1)
+           	if (lineCount == 1)
         	{   
         		player.Name=input.skip(Pattern.compile(".+: ")).nextLine();
-                        System.out.println(player.Name);
+//                        System.out.println(player.Name);
         	}
                 else if(lineCount==2)
                         {
         		player.Nationality=input.skip(Pattern.compile(".+: ")).nextLine();
-                        System.out.println(player.Nationality);
+//                        System.out.println(player.Nationality);
         	}
         	else if (lineCount == 3)
         	{
         		player.Club=input.skip(Pattern.compile(".+: ")).nextLine();
-                        System.out.println(player.Club);
+//                        System.out.println(player.Club);
         	}
         	else if (lineCount == 4)
         	{
         		player.Position=input.skip(Pattern.compile(".+: ")).nextInt();
                         input.nextLine();
-                        System.out.println(player.Position);
+//                        System.out.println(player.Position);
         	}
-        	else if (lineCount==5)
+        	else if (lineCount == 5)
         	{
         		player.Price = input.skip(Pattern.compile(".+: ")).nextDouble();
                         input.nextLine();
-                        System.out.println(player.Price);
+//                        System.out.println(player.Price);
         	}
                 else if (lineCount==6){
                         player.YellowCard = input.skip(Pattern.compile(".+: ")).nextBoolean();
                         input.nextLine();
-                        System.out.println(player.YellowCard);
+//                        System.out.println(player.YellowCard);
                 }
         	
                 else if (lineCount==7){
                         player.RedCard = input.skip(Pattern.compile(".+: ")).nextBoolean();
-                        System.out.println(player.RedCard);
+//                        System.out.println(player.RedCard);
                 }
                 
                 else{System.out.println("Invalid input!"); return null;}
@@ -77,7 +84,7 @@ public class SquadController {
     }
     public void addPlayer(Player player) throws IOException{
         if (player == null){System.out.println("Invalid player"); return;}
-        if (squad.playerList.size() <= 15){
+        if (squad.playerList.size() < 15){
             if (linesMethods.lineNameSkipper_Comparer(player.Name, squad.SquadPlayersFile) == true){System.out.println("Player already exists in your squad");return;}
 //            if ((linesMethods.linePriceSkipper_Calculator(squad.SquadPlayersFile) - player.Price) < 0){System.out.println("Overbudget");return;}
             if ((squad.squadBudget - player.Price) < 0){System.out.println("Overbudget");return;}
@@ -112,7 +119,7 @@ public class SquadController {
             Database database = new Database();
             database.addSquadPlayerDatabase(squad, player, squad.SquadPlayersFile);
         }
-        else if (squad.playerList.size() > 15){
+        else if (squad.playerList.size() >= 15){
         System.out.println("Squad can't exceed 15 players");
         }
     }
