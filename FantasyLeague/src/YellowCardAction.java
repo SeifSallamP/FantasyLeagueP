@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 public class YellowCardAction implements CardsActions {
     int score;
     int cardValue = -1;
+     YellowCardAction(GameWeekBufferedEditor gwbe){
+        CardsActions.gwbe.gameweek = gwbe.gameweek;
+    }
     @Override
     public void giveCard(String playerName) {
         score = cardValue;
@@ -18,7 +21,8 @@ public class YellowCardAction implements CardsActions {
         }
     }
  public static void main(String[] args){
-     YellowCardAction yd = new YellowCardAction();
-     yd.giveCard("Cristiano Ronaldo");
+     EventPerformer ep = new EventPerformer();
+     ep.selectGameWeek("Game Week 1");
+     ep.giveYellowCard("Cristiano Ronaldo");
  }  
 }

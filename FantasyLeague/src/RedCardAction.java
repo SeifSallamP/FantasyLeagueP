@@ -5,6 +5,9 @@ import java.util.logging.Logger;
 public class RedCardAction implements CardsActions {
     int score;
     int cardValue = -3;
+     RedCardAction(GameWeekBufferedEditor gwbe){
+        CardsActions.gwbe.gameweek = gwbe.gameweek;
+    }
     @Override
     public void giveCard(String playerName) {
         score = cardValue;
@@ -16,7 +19,8 @@ public class RedCardAction implements CardsActions {
         }
     }
 public static void main(String[] args){
-    RedCardAction rd = new RedCardAction();
-    rd.giveCard("Cristiano Ronaldo");
+    EventPerformer ep = new EventPerformer();
+    ep.selectGameWeek("Game Week 1");
+    ep.giveRedCard("Cristiano Ronaldo");
 }   
 }

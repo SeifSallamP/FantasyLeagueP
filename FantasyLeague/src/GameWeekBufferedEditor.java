@@ -22,15 +22,18 @@ public class GameWeekBufferedEditor {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(playerFile, true));
 //            bufferedWriter.write(userText + score);
             bufferedWriter.write("Total Points: " + 0);bufferedWriter.newLine();
-            bufferedWriter.write("Goals: " + 0); bufferedWriter.newLine();
+            bufferedWriter.write("Goals Scored: " + 0); bufferedWriter.newLine();
             bufferedWriter.write("Assists: " + 0); bufferedWriter.newLine();
-            bufferedWriter.write("Yellow Cards:" + 0); bufferedWriter.newLine();
-            bufferedWriter.write("Red Cards:" + 0); bufferedWriter.newLine();
+            bufferedWriter.write("Yellow Cards: " + 0); bufferedWriter.newLine();
+            bufferedWriter.write("Red Cards: " + 0); bufferedWriter.newLine();
             bufferedWriter.write("Clean Sheet: " + 0); bufferedWriter.newLine();
             bufferedWriter.write("MVP: " + 0); bufferedWriter.newLine();
             bufferedWriter.write("Bonus Points: " + 0);bufferedWriter.newLine();
             bufferedWriter.write("Saved Penalties: " + 0 ); bufferedWriter.newLine();
             bufferedWriter.write("Missed Penalties: " + 0);bufferedWriter.newLine();
+            bufferedWriter.write("Conceded Goals: " + 0); bufferedWriter.newLine();
+            bufferedWriter.write("Played Just 60 Minutes: " + 0); bufferedWriter.newLine();
+            bufferedWriter.write("Played More Than 60 Minutes: " + 0); bufferedWriter.newLine();
             bufferedWriter.close();
         }
 //        File tempPlayerFile = new File("Database" + File.separator + "Game Weeks" + File.separator + "Game Week 1" + File.separator + playerName + " temp.txt");
@@ -120,23 +123,44 @@ public class GameWeekBufferedEditor {
                                   playerFileInUserFolder.createNewFile();
                                    bufferedWriter = new BufferedWriter(new FileWriter(squadGameWeek.getAbsolutePath() +
                                                                     File.separator + player.getName()));
+                              int points = 0;
                               while ((tempPlayerStr = playerReader.readLine()) != null){
                                   //Don't forget to continue coding it
+                                  points = tempPlayerStr.contains("Total Points: ") ? 
+                                                        Integer.parseInt(tempPlayerStr.replace("Total Points: ", "")) : 0;
+                                  
                                   System.out.println("tempPlayerStr: " + tempPlayerStr);
                                   bufferedWriter.write(tempPlayerStr);bufferedWriter.newLine();
                               }
+                              File squadPointsFile = new File(y.getAbsolutePath() + File.separator + "Squad Points.txt");
+                              BufferedReader squadPointsFileReader = new BufferedReader(new FileReader(squadPointsFile));
+                              points = points + Integer.parseInt(String.valueOf(squadPointsFileReader.readLine().replace("Squad Points: ", "")));
+                              BufferedWriter squadPointsFileWriter = new BufferedWriter(new FileWriter(squadPointsFile));
+                              squadPointsFileWriter.write("Squad Points: " + points); squadPointsFileWriter.flush();
+                              squadPointsFileReader.close(); squadPointsFileWriter.close();
                               }
-                              else{File tempPlayerFileInUserFolder = new File(squadGameWeek.getAbsolutePath()
+                              else{
+                                  File tempPlayerFileInUserFolder = new File(squadGameWeek.getAbsolutePath()
                                                                                     + File.separator + "temp " + player.getName());
                               tempPlayerFileInUserFolder.createNewFile();
                                   bufferedWriter = new BufferedWriter(new FileWriter(tempPlayerFileInUserFolder));   
+                                  int points = 0;
                               while ((tempPlayerStr = bufferedReader.readLine()) != null){
                                   //Don't forget to continue coding it
+                                  points = tempPlayerStr.contains("Total Points: ") ? 
+                                                        Integer.parseInt(tempPlayerStr.replace("Total Points: ", "")) : 0;
                                   bufferedWriter.write(tempPlayerStr);
+                                  bufferedWriter.newLine();
                               }
                               tempPlayerFileInUserFolder.renameTo(new File(squadGameWeek.getAbsolutePath() +
                                                                     File.separator + player.getName()));
-                              new File(squadGameWeek.getAbsolutePath() + File.separator + player.getName()).delete();
+                              new File(squadGameWeek.getAbsolutePath() + File.separator + player.getName()).delete(); 
+                              File squadPointsFile = new File(y.getAbsolutePath() + File.separator + "Squad Points.txt");
+                              BufferedReader squadPointsFileReader = new BufferedReader(new FileReader(squadPointsFile));
+                              points = points + Integer.parseInt(String.valueOf(squadPointsFileReader.readLine().replace("Squad Points: ", "")));
+                              BufferedWriter squadPointsFileWriter = new BufferedWriter(new FileWriter(squadPointsFile));
+                              squadPointsFileWriter.write("Squad Points: " + points); squadPointsFileWriter.flush();
+                              squadPointsFileReader.close(); squadPointsFileWriter.close();
                               }bufferedWriter.close();
                           }
                       }
@@ -151,9 +175,10 @@ public class GameWeekBufferedEditor {
         ep.selectGameWeek("Game Week 1");
         System.out.println("Game week: " + ep.gameWeek.currentGameWeek);
         System.out.println("Buffered Week: " + ep.gameWeekBufferedEditor.gameweek.currentGameWeek);
-//        ep.scoreGoal("Cristiano Ronaldo");
-//        ep.scoreGoals("Cristiano Ronaldo", 5);
-        AttScores n = new AttScores();
-        n.scoreGoal("Cristiano Ronaldo");
+        ep.gameWeekBufferedEditor.pointsWriter("Cristiano Ronaldo", "Total Points: ", 5);
+        ep.scoreGoal("Cristiano Ronaldo");
+        ep.scoreGoals("Cristiano Ronaldo", 5);
+//        AttScores n = new AttScores();
+//        n.scoreGoal("Cristiano Ronaldo");
     }
     }

@@ -1,11 +1,12 @@
-
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class BonusPoints {
     GameWeekBufferedEditor gwbe = new GameWeekBufferedEditor();
+     BonusPoints(GameWeekBufferedEditor gwbe){
+        this.gwbe.gameweek = gwbe.gameweek;
+    }
     int addBonus(int bonusPoints){
         return bonusPoints;
     };
@@ -18,7 +19,8 @@ public class BonusPoints {
         }
     }
 public static void main(String[] args){
-    BonusPoints bp = new BonusPoints();
-    bp.addBonus("Cristiano Ronaldo", 1);
+    EventPerformer ep = new EventPerformer();
+    ep.selectGameWeek("Game Week 1");
+    ep.addBonusPoints("Cristiano Ronaldo", 3);
 }
 }

@@ -44,7 +44,7 @@ public class Database {
         File squadsFolder = new File(usersFolder.getAbsolutePath() + File.separator + user.getEmail() + File.separator + "Squads");
         squadsFolder.mkdir();
         BufferedWriter br = new BufferedWriter(new FileWriter(userFile));
-        br.append("Email: " + user.getEmail() +"\r\nPassword: " + user.getPassword() + "\r\nFirst Name: " + user.getFirstName() + "\r\nLast Name: " + user.getLastName() + "\r\nFavourite Club: " + user.getFavouriteClub()).flush();
+        br.append("Email: " + user.getEmail() +"\r\nPassword: " + user.getPassword() + "\r\nFirst Name: " + user.getFirstName() + "\r\nLast Name: " + user.getLastName() + "\r\nFavourite Club: " + user.getFavouriteClub() +"\r\nType: " + user.getType()).flush();
         br.close();
     };
     public void removeUser(User user){
@@ -52,6 +52,12 @@ public class Database {
         File userFile = new File(usersFolder.getAbsolutePath() + user.getEmail());
         userFile.delete();
                 }
-    
+    public void viewPlayers(){
+        File filesList[] = playersFolder.listFiles();
+        int num = 1;
+        for (File x : filesList){
+            System.out.println("Player " + num + " = " + x.getName().replace(".txt", ""));
+        }
+    }
     
 }

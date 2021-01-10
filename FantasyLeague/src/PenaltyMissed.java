@@ -16,6 +16,14 @@ public class PenaltyMissed extends PenaltyAction {
     PenaltyMissed(int newPenaltyValue){
             this.penaltyValue = newPenaltyValue;
         }
+     PenaltyMissed(GameWeekBufferedEditor gwbe, int penaltyValue){
+        this.gwbe.gameweek = gwbe.gameweek;
+        this.penaltyValue = penaltyValue;
+    }
+     
+     PenaltyMissed(GameWeekBufferedEditor gwbe){
+        this.gwbe.gameweek = gwbe.gameweek;
+    }
         void missPenalty(String playerName) throws IOException{
             score = penaltyValue;
             gwbe.pointsWriter(playerName, "Total Points: ", score);
@@ -26,6 +34,9 @@ public class PenaltyMissed extends PenaltyAction {
             gwbe.pointsWriter(playerName, "Total Points: ", score);
             gwbe.pointsWriter(playerName, "Missed Penalties ", penalties);
         }
+         void setPenaltyValue(int newPenaltyValue){
+             this.penaltyValue = newPenaltyValue;
+         }
         public static void main(String[] args) throws IOException{
             PenaltyMissed pm = new PenaltyMissed();
             pm.missPenalty("Cristiano Ronaldo");

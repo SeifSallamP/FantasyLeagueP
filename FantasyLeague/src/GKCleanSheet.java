@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 public class GKCleanSheet implements CleanSheet {
     protected int score;
     protected int cleanSheetValue = 4;
+     GKCleanSheet(GameWeekBufferedEditor gwbe){
+        CleanSheet.gwbe.gameweek = gwbe.gameweek;
+    }
     @Override
     public void cleanSheet(String playerName) {
         score = cleanSheetValue;
@@ -18,8 +21,9 @@ public class GKCleanSheet implements CleanSheet {
         }
     }
 public static void main(String[] args){
-    GKCleanSheet gkc = new GKCleanSheet();
-    gkc.cleanSheet("Cristiano Ronaldo");
+    EventPerformer ep = new EventPerformer();
+    ep.selectGameWeek("Game Week 1");
+    ep.scoreGoal("Ronaldo");
 }
     
 }
