@@ -34,7 +34,6 @@ public class MidScores implements ScoredGoals {
         EventPerformer ep = new EventPerformer();
         ep.selectGameWeek("Game Week 1");
         ep.scoreGoal("Cristiano Ronaldo");
-//        MidScores ms = new MidScores();
-//        ms.scoreGoal("Cristiano Ronaldo");
+
     }
 }

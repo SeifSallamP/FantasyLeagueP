@@ -32,7 +32,5 @@ public  class User{
        public String getType(){
            return type;
        }
-    User() {
-      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+       User(){}
 }

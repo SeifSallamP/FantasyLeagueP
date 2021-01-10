@@ -13,7 +13,6 @@ public class GameWeekController {
     }
     void addGameWeek(){
         File newGameWeek = new File("Database" + File.separator + "Game Weeks" + File.separator + "Game Week " + (countGameWeeks() + 1));
-//        System.out.println(newGameWeek.getAbsolutePath());
         newGameWeek.mkdir();
     }
     void emptyGameWeek(String gameWeekName){
@@ -29,9 +28,5 @@ public class GameWeekController {
         int numberOfFolders = GameWeeksFolder.list().length;
         return numberOfFolders;
     }
-    public static void main(String[] args){
-//        GameWeekController gameWeek = new GameWeekController();
-//        gameWeek.addGameWeek();
-//        System.out.println(gameWeek.countGameWeeks());
-    }
+   
 }

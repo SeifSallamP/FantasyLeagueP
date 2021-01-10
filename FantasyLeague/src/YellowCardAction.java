@@ -20,9 +20,4 @@ public class YellowCardAction implements CardsActions {
             Logger.getLogger(YellowCardAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
- public static void main(String[] args){
-     EventPerformer ep = new EventPerformer();
-     ep.selectGameWeek("Game Week 1");
-     ep.giveYellowCard("Cristiano Ronaldo");
- }  
 }

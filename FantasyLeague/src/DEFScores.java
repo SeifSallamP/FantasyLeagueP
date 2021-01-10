@@ -29,10 +29,5 @@ public class DEFScores implements ScoredGoals {
             Logger.getLogger(MidScores.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args){
-        EventPerformer ep = new EventPerformer();
-        ep.selectGameWeek("Game Week 1");
-        DEFScores ds = new DEFScores(ep.gameWeekBufferedEditor);
-        ds.scoreGoal("Cristiano Ronaldo");
-    }
+
 }

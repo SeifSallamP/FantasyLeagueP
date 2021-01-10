@@ -11,6 +11,7 @@ public class CMain {
         System.out.println("To become a system user use the following credentials: ");
         System.out.println("Use this Email: "+ "admin@admin.com");
         System.out.println("Use this password: " + "admin");
+        System.out.println("Game weeks are entered as follows: Game Week xx (case sensitive)");
         try {
             reg.register("admin@admin.com", "admin", "Omar", "Ahmed", "Bateekha", "SystemUser");
         } catch (IOException ex) {

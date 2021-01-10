@@ -20,7 +20,6 @@ public class EventPerformer {
     PenaltyAction penaltyAction;
     EventPerformer(){
     playerFactory = new PlayerFactory();
-    goalAssists = new GoalAssists();
     gameWeek = new GameWeekController();
     gameWeekBufferedEditor = new GameWeekBufferedEditor(gameWeek);
     penaltyAction=new PenaltyAction();
@@ -29,7 +28,6 @@ public class EventPerformer {
         playerFactory = new PlayerFactory();
         cleanSheet = playerFactory.createPlayerCleanSheet(playerName);
         scoredGoals = playerFactory.createPlayerScore(playerName);
-        goalAssists = new GoalAssists();
         gameWeek = new GameWeekController();
         gameWeekBufferedEditor = new GameWeekBufferedEditor(gameWeek);
     }
@@ -52,6 +50,7 @@ public class EventPerformer {
         }
     }
     void assistGoal(String playerName){
+    	goalAssists=new GoalAssists(gameWeekBufferedEditor);
         goalAssists.assistedGoal(playerName);
         try {
             gameWeekBufferedEditor.pointsSquadWriter();
@@ -60,6 +59,7 @@ public class EventPerformer {
         }
     }
     void assistGoal(String playerName, int goals){
+        goalAssists = new GoalAssists(gameWeekBufferedEditor);
         goalAssists.assistGoal(playerName, goals);
         try {
             gameWeekBufferedEditor.pointsSquadWriter();

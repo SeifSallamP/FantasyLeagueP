@@ -20,10 +20,6 @@ public class GKCleanSheet implements CleanSheet {
             Logger.getLogger(GKCleanSheet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-public static void main(String[] args){
-    EventPerformer ep = new EventPerformer();
-    ep.selectGameWeek("Game Week 1");
-    ep.scoreGoal("Ronaldo");
-}
+
     
 }

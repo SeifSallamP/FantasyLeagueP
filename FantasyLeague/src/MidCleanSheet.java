@@ -22,7 +22,6 @@ public static void main(String[] args){
     EventPerformer ep = new EventPerformer();
     ep.selectGameWeek("Game Week 1");
     ep.DoCleanSheet("Mario Gotze");
-//    MidCleanSheet mc = new MidCleanSheet(ep.gameWeekBufferedEditor);
-//    mc.cleanSheet("Cristiano Ronaldo");
+
 }    
 }

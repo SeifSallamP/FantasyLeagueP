@@ -30,10 +30,6 @@ public class GoalsConcededDEF implements GoalsConceded {
         }
     
     }
-    public static void main(String[] args){
-        EventPerformer ep = new EventPerformer();
-        ep.selectGameWeek("Game Week 1");
-        ep.concedeGoals("Ronaldo");
-    }
+
     
 }

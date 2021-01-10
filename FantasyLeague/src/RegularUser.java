@@ -8,7 +8,6 @@ public class RegularUser extends User {
     public Database db=new Database();
 	public RegularUser()
 	{
-//                squad = new Squad("Database" + File.separator + "Users" + File.separator + this.email + File.separator + "Squad List.txt","Database" + File.separator + "Users" + File.separator + this.email + File.separator + "Budget.txt");
                 squadController = new SquadController(squad);
 	}
 
