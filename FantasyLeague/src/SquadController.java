@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import static java.lang.Integer.parseInt;
+import static java.lang.Double.parseDouble;
 
 public class SquadController {
     File squadsFolder;
@@ -128,51 +129,86 @@ public class SquadController {
         System.out.println("Squad can't exceed 15 players");
         }
     }
-    public void removePlayerSquad(String playerName){
-        BufferedReader SquadPlayersFileReader = null;
-        try {
-            File tempSquadPlayersFile = new File(squad.SquadPlayersFile.getAbsolutePath());
-            SquadPlayersFileReader = new BufferedReader(new FileReader(squad.SquadPlayersFile));
-            BufferedWriter tempSquadPlayersFileWriter = new BufferedWriter(new FileWriter(tempSquadPlayersFile));
-            String readerStr;
-            while ((readerStr = SquadPlayersFileReader.readLine()) != null){
-                if(readerStr.replace("Name: ", "").equals(playerName)){
-                    for(int i=0;i<=7;i++){SquadPlayersFileReader.readLine();}
-                }else{
-                    tempSquadPlayersFileWriter.write(readerStr);
-                }
-            }
-            tempSquadPlayersFile.renameTo(squad.SquadPlayersFile);
-            squad.SquadPlayersFile.delete();
-            tempSquadPlayersFileWriter.close();
-            SquadPlayersFileReader.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(SquadController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SquadController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                SquadPlayersFileReader.close();
-            } catch (IOException ex) {
-                Logger.getLogger(SquadController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+    
+    public void removePlayerFromSquad(String playerName, String squadName) throws IOException
+    {
+    	File squadFolder = new File(squadsFolder.getAbsolutePath() + File.separator + squadName);
+    	File squadFile = new File(squadFolder.getAbsolutePath()+ File.separator +"Squad List.txt");
+    	File tempFile = new File(squadFolder.getAbsolutePath()+ File.separator +"myTempFile.txt");
+    	File budgetFile = new File(squadFolder.getAbsolutePath()+ File.separator +"Budget.txt");
+    	File tempBFile = new File(squadFolder.getAbsolutePath()+ File.separator +"tempBudget.txt");
+    	Scanner reader=new Scanner(squadFile);
+    	Scanner BReader=new Scanner(budgetFile);
+    	BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+    	BufferedWriter Bwriter = new BufferedWriter(new FileWriter(tempBFile));
+    	String currentLine;
+    	double budgetchange=0;
+    	while(reader.hasNextLine()) {
+    		currentLine=reader.nextLine();
+    	    if(currentLine.contains("Name: "+playerName))
+    	    {
+    	    	reader.nextLine();
+    	    	reader.nextLine();
+    	    	reader.nextLine();
+    	    	reader.next();
+    	    	budgetchange=Double.parseDouble(reader.next());
+    	    	reader.nextLine();
+    	    	reader.nextLine();
+    	    	reader.nextLine();
+    	    	if (reader.hasNextLine())
+    	    		currentLine=reader.nextLine();
+    	    	else break;
+    	    }
+    	    writer.write(currentLine + System.getProperty("line.separator"));
+    	    writer.flush();
+    	}
+    	reader.close();
+    	writer.close();
+    	double budgetval=Double.parseDouble(BReader.next());
+    	budgetval+=budgetchange;
+    	Bwriter.write(budgetval + System.getProperty("line.separator"));
+    	Bwriter.flush();
+    	BReader.close();
+    	Bwriter.close();
+    	squadFile.delete();
+    	budgetFile.delete();
+    	boolean success = tempFile.renameTo(squadFile);
+    	boolean success2 = tempBFile.renameTo(budgetFile);
     }
     public void viewSquad(String squadName) throws FileNotFoundException
     {
     	File squadFolder = new File(squadsFolder.getAbsolutePath() + File.separator + squadName);
     	File squadFile=new File(squadFolder.getAbsoluteFile()+ File.separator + "Squad List.txt");
     	Scanner filescanner=new Scanner(squadFile);
-    	while (filescanner.hasNext())
+    	while (filescanner.hasNextLine())
     	{
-    		String PName=filescanner.next();
-    		if (PName.contentEquals("Name:"))
+    		String PName=filescanner.nextLine();
+    		if (PName.contains("Name:"))
     		{
-    			PName=filescanner.next();
-    			System.out.println("Player name: "+PName);
+    			System.out.println("Player name: "+PName.replace("Name: ", ""));
     		}
     	}
     	filescanner.close();
+    }
+    public void viewSquads() throws FileNotFoundException
+    {
+    	File squadFolder = new File(squadsFolder.getAbsolutePath());
+    	File dirlist[]=squadFolder.listFiles();
+    	int ctr=1;
+    	for (File x : dirlist)
+    	{
+    		System.out.println(ctr+"- "+x.getName().replace(".txt", ""));
+    		ctr++;
+    	}
+    }
+    public void deleteSquad(String squadName) throws FileNotFoundException
+    {
+    	File squadFolder = new File(squadsFolder.getAbsolutePath() + File.separator + squadName);
+    	for (File x : squadFolder.listFiles())
+    	{
+    		x.delete();
+    	}
+    	squadFolder.delete();
     }
     public void getPoints(String squadName,String gameWeek)throws FileNotFoundException
     {
@@ -199,7 +235,6 @@ public class SquadController {
     					gwFileScanner.next();
     					gwFileScanner.next();
     					String pts=gwFileScanner.next();
-    					System.out.println(pts);
     					TotalPoints+=parseInt(pts);
     					gwFileScanner.close();
     				}

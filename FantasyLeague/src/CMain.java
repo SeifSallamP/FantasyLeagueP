@@ -48,7 +48,14 @@ public class CMain {
                                             RegularUser regularUser = (RegularUser) tempObj;
                                             boolean flag = true;
                                             do{
-                                            System.out.println("1- Add player to your squad\n2- Remove player from your squad\n3- Create new squad\n4- Get squad points of certain game week\n5- View squad by name\n6- Back");
+                                            System.out.println("1- Add player to your squad");
+                                      		System.out.println("2- Remove player from your squad");
+                                           	System.out.println("3- Create new squad");
+                                           	System.out.println("4- Get squad points of certain game week");
+                                          	System.out.println("5- View squad by name");
+                                        	System.out.println("6- Delete squad");
+                                        	System.out.println("7- View all squads");
+                                        	System.out.println("8- Back");
                                             		 
                                             controllerChoice = scan.nextLine();
                                             switch (controllerChoice){
@@ -66,7 +73,7 @@ public class CMain {
                                                 		regularUser.squadController.selectSquad(selectedSquad2);
                                                 		System.out.println("Squad player to be removed: ");
                                                 		String playerName__2 = scan.nextLine();
-                                                		regularUser.squadController.removePlayerSquad(playerName__2);
+                                                		regularUser.squadController.removePlayerFromSquad(playerName__2,selectedSquad2);
                                                 		break;
                                                 case "3": 
                                                 	System.out.println("Enter the squad's name:");
@@ -86,6 +93,14 @@ public class CMain {
                                                 	regularUser.squadController.viewSquad(viewedSquad);
                                                 	break;
                                                 case "6":
+                                                	System.out.println("Enter the squad's name:");
+                                                	String deletedSquad=scan.nextLine();
+                                                	regularUser.squadController.deleteSquad(deletedSquad);
+                                                	break;
+                                                case "7":
+                                                	regularUser.squadController.viewSquads();
+                                                	break;
+                                                case "8":
                                                 	flag = false; break;
                                                 default: System.out.println("Invalid input"); break;
                                                     
