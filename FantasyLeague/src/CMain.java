@@ -8,6 +8,9 @@ public class CMain {
         Login logger = new Login();
         Registration reg=new Registration();
         String ans=null;
+        System.out.println("To become a system user use the following credentials: ");
+        System.out.println("Use this Email: "+ "admin@admin.com");
+        System.out.println("Use this password: " + "admin");
         try {
             reg.register("admin@admin.com", "admin", "Omar", "Ahmed", "Bateekha", "SystemUser");
         } catch (IOException ex) {

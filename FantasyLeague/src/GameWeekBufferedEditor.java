@@ -31,6 +31,7 @@ public class GameWeekBufferedEditor {
             bufferedWriter.write("Conceded Goals: " + 0); bufferedWriter.newLine();
             bufferedWriter.write("Played Just 60 Minutes: " + 0); bufferedWriter.newLine();
             bufferedWriter.write("Played More Than 60 Minutes: " + 0); bufferedWriter.newLine();
+            bufferedWriter.flush();
             bufferedWriter.close();
         }
 //        File tempPlayerFile = new File("Database" + File.separator + "Game Weeks" + File.separator + "Game Week 1" + File.separator + playerName + " temp.txt");
@@ -44,7 +45,8 @@ public class GameWeekBufferedEditor {
                 temp = temp + score;
                 bufferedWriter.write(userText + temp);
                 bufferedWriter.newLine();
-            }else {bufferedWriter.write(readText); bufferedWriter.newLine();}
+                bufferedWriter.flush();
+            }else {bufferedWriter.write(readText); bufferedWriter.newLine();bufferedWriter.flush();}
         }
         bufferedWriter.close();
         bufferedReader.close();
@@ -71,52 +73,53 @@ public class GameWeekBufferedEditor {
                       for (File player : gameweek.currentGameWeek.getAbsoluteFile().listFiles()){
                           if (tempStr.replace("Name: ", "").contentEquals(player.getName().replace(".txt", ""))){
                               BufferedReader playerReader = new BufferedReader(new FileReader(player));
-                              String tempPlayerStr;System.out.println("Player name: " + player.getName());
+                              String tempPlayerStr;//System.out.println("Player name: " + player.getName());
                               File playerFileInUserFolder = new File(squadGameWeek.getAbsolutePath() + File.separator + player.getName());
                               BufferedWriter bufferedWriter;
                               if (!playerFileInUserFolder.isDirectory()){
                                   playerFileInUserFolder.createNewFile();
                                    bufferedWriter = new BufferedWriter(new FileWriter(squadGameWeek.getAbsolutePath() +
                                                                     File.separator + player.getName()));
-                              int points = 0;
+//                              int points = 0;
                               while ((tempPlayerStr = playerReader.readLine()) != null){
                                   //Don't forget to continue coding it
-                                  points = tempPlayerStr.contains("Total Points: ") ? 
-                                                        Integer.parseInt(tempPlayerStr.replace("Total Points: ", "")) : 0;
-                                  
-                                  System.out.println("tempPlayerStr: " + tempPlayerStr);
-                                  bufferedWriter.write(tempPlayerStr);bufferedWriter.newLine();
+//                                  points = tempPlayerStr.contains("Total Points: ") ? 
+//                                                        Integer.parseInt(tempPlayerStr.replace("Total Points: ", "")) : 0;
+//                                  System.out.println("tempPlayerStr: " + tempPlayerStr);
+                                  bufferedWriter.write(tempPlayerStr);bufferedWriter.newLine();bufferedWriter.flush();
                               }
-                              File squadPointsFile = new File(y.getAbsolutePath() + File.separator + "Squad Points.txt");
-                              BufferedReader squadPointsFileReader = new BufferedReader(new FileReader(squadPointsFile));
-                              points = points + Integer.parseInt(String.valueOf(squadPointsFileReader.readLine().replace("Squad Points: ", "")));
-                              BufferedWriter squadPointsFileWriter = new BufferedWriter(new FileWriter(squadPointsFile));
-                              squadPointsFileWriter.write("Squad Points: " + points); squadPointsFileWriter.flush();
-                              squadPointsFileReader.close(); squadPointsFileWriter.close();
-                              }
+//                              File squadPointsFile = new File(y.getAbsolutePath() + File.separator + "Squad Points.txt");
+//                              BufferedReader squadPointsFileReader = new BufferedReader(new FileReader(squadPointsFile));
+//                              points = points + Integer.parseInt(String.valueOf(squadPointsFileReader.readLine().replace("Squad Points: ", "")));
+//                              BufferedWriter squadPointsFileWriter = new BufferedWriter(new FileWriter(squadPointsFile));
+//                              squadPointsFileWriter.write("Squad Points: " + points); squadPointsFileWriter.flush();
+//                              squadPointsFileReader.close(); squadPointsFileWriter.close();
+                             }
                               else{
                                   File tempPlayerFileInUserFolder = new File(squadGameWeek.getAbsolutePath()
                                                                                     + File.separator + "temp " + player.getName());
                               tempPlayerFileInUserFolder.createNewFile();
                                   bufferedWriter = new BufferedWriter(new FileWriter(tempPlayerFileInUserFolder));   
-                                  int points = 0;
+//                                  int points = 0;
                               while ((tempPlayerStr = bufferedReader.readLine()) != null){
                                   //Don't forget to continue coding it
-                                  points = tempPlayerStr.contains("Total Points: ") ? 
-                                                        Integer.parseInt(tempPlayerStr.replace("Total Points: ", "")) : 0;
+//                                  points = tempPlayerStr.contains("Total Points: ") ? 
+//                                                        Integer.parseInt(tempPlayerStr.replace("Total Points: ", "")) : 0;
                                   bufferedWriter.write(tempPlayerStr);
                                   bufferedWriter.newLine();
+                                  bufferedWriter.flush();
                               }
+                              bufferedWriter.close();
+                              new File(squadGameWeek.getAbsolutePath() + File.separator + player.getName()).delete();
                               tempPlayerFileInUserFolder.renameTo(new File(squadGameWeek.getAbsolutePath() +
                                                                     File.separator + player.getName()));
-                              new File(squadGameWeek.getAbsolutePath() + File.separator + player.getName()).delete(); 
-                              File squadPointsFile = new File(y.getAbsolutePath() + File.separator + "Squad Points.txt");
-                              BufferedReader squadPointsFileReader = new BufferedReader(new FileReader(squadPointsFile));
-                              points = points + Integer.parseInt(String.valueOf(squadPointsFileReader.readLine().replace("Squad Points: ", "")));
-                              BufferedWriter squadPointsFileWriter = new BufferedWriter(new FileWriter(squadPointsFile));
-                              squadPointsFileWriter.write("Squad Points: " + points); squadPointsFileWriter.flush();
-                              squadPointsFileReader.close(); squadPointsFileWriter.close();
-                              }bufferedWriter.close();
+//                              File squadPointsFile = new File(y.getAbsolutePath() + File.separator + "Squad Points.txt");
+//                              BufferedReader squadPointsFileReader = new BufferedReader(new FileReader(squadPointsFile));
+//                              points = points + Integer.parseInt(String.valueOf(squadPointsFileReader.readLine().replace("Squad Points: ", "")));
+//                              BufferedWriter squadPointsFileWriter = new BufferedWriter(new FileWriter(squadPointsFile));
+//                              squadPointsFileWriter.write("Squad Points: " + points); squadPointsFileWriter.flush();
+//                              squadPointsFileReader.close(); squadPointsFileWriter.close();
+                              }
                           }
                       }
                     }
