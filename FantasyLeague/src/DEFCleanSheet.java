@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 public class DEFCleanSheet implements CleanSheet {
     protected int score;
     protected int cleanSheetValue = 4;
+     DEFCleanSheet(GameWeekBufferedEditor gwbe){
+        CleanSheet.gwbe.gameweek = gwbe.gameweek;
+    }
     @Override
     public void cleanSheet(String playerName) {
         score = cleanSheetValue;
@@ -19,7 +22,9 @@ public class DEFCleanSheet implements CleanSheet {
     }
     
 public static void main(String[] args){
-    DEFCleanSheet dc = new DEFCleanSheet();
+    EventPerformer ep = new EventPerformer();
+    ep.selectGameWeek("Game Week 1");
+    DEFCleanSheet dc = new DEFCleanSheet(ep.gameWeekBufferedEditor);
     dc.cleanSheet("Cristiano Ronaldo");
 }
 }

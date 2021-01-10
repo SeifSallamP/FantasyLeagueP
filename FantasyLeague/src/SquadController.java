@@ -1,12 +1,17 @@
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import static java.lang.Integer.parseInt;
 
 public class SquadController {
     File squadsFolder;
@@ -122,6 +127,88 @@ public class SquadController {
         else if (squad.playerList.size() >= 15){
         System.out.println("Squad can't exceed 15 players");
         }
+    }
+    public void removePlayerSquad(String playerName){
+        BufferedReader SquadPlayersFileReader = null;
+        try {
+            File tempSquadPlayersFile = new File(squad.SquadPlayersFile.getAbsolutePath());
+            SquadPlayersFileReader = new BufferedReader(new FileReader(squad.SquadPlayersFile));
+            BufferedWriter tempSquadPlayersFileWriter = new BufferedWriter(new FileWriter(tempSquadPlayersFile));
+            String readerStr;
+            while ((readerStr = SquadPlayersFileReader.readLine()) != null){
+                if(readerStr.replace("Name: ", "").equals(playerName)){
+                    for(int i=0;i<=7;i++){SquadPlayersFileReader.readLine();}
+                }else{
+                    tempSquadPlayersFileWriter.write(readerStr);
+                }
+            }
+            tempSquadPlayersFile.renameTo(squad.SquadPlayersFile);
+            squad.SquadPlayersFile.delete();
+            tempSquadPlayersFileWriter.close();
+            SquadPlayersFileReader.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SquadController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SquadController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                SquadPlayersFileReader.close();
+            } catch (IOException ex) {
+                Logger.getLogger(SquadController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    public void viewSquad(String squadName) throws FileNotFoundException
+    {
+    	File squadFolder = new File(squadsFolder.getAbsolutePath() + File.separator + squadName);
+    	File squadFile=new File(squadFolder.getAbsoluteFile()+ File.separator + "Squad List.txt");
+    	Scanner filescanner=new Scanner(squadFile);
+    	while (filescanner.hasNext())
+    	{
+    		String PName=filescanner.next();
+    		if (PName.contentEquals("Name:"))
+    		{
+    			PName=filescanner.next();
+    			System.out.println("Player name: "+PName);
+    		}
+    	}
+    	filescanner.close();
+    }
+    public void getPoints(String squadName,String gameWeek)throws FileNotFoundException
+    {
+    	Database db = new Database();
+    	File squadFolder = new File(squadsFolder.getAbsolutePath() + File.separator + squadName);
+    	File squadFile=new File(squadFolder.getAbsoluteFile()+ File.separator + "Squad List.txt");
+    	Scanner squadFileScanner=new Scanner(squadFile);
+    	File gwFolder = new File(db.databaseFolder+ File.separator + "Game Weeks" + File.separator + gameWeek);
+    	File folderlist[]=gwFolder.listFiles();
+    	int TotalPoints=0;
+    	while (squadFileScanner.hasNext())
+    	{
+    		int ctr=0;
+    		String PName=squadFileScanner.next();
+    		if (PName.contentEquals("Name:"))
+    		{
+    			PName=squadFileScanner.next();
+    	    	
+    			for (File x:folderlist)
+    			{
+    				if (PName.contentEquals(x.getName().replace(".txt", "")))
+    				{
+    					Scanner gwFileScanner=new Scanner(x);
+    					gwFileScanner.next();
+    					gwFileScanner.next();
+    					String pts=gwFileScanner.next();
+    					System.out.println(pts);
+    					TotalPoints+=parseInt(pts);
+    					gwFileScanner.close();
+    				}
+    			}
+    		}
+    	}
+    	System.out.println("Total points for "+gameWeek+" is "+TotalPoints);
+    	squadFileScanner.close();
+    	
     }
     public static void main(String[] args) throws IOException{
         SquadController sc = new SquadController(new File("Database" + File.separator + "Users" + File.separator + "mromar4"));

@@ -6,8 +6,11 @@ import java.util.logging.Logger;
 
 public class MVP{
     int score;
-    BonusPoints bp = new BonusPoints();
     GameWeekBufferedEditor gwbe = new GameWeekBufferedEditor();
+    BonusPoints bp = new BonusPoints(gwbe);
+     MVP(GameWeekBufferedEditor gwbe){
+        this.gwbe.gameweek = gwbe.gameweek;
+    }
     /*
     Player selectMVP(String playerName){
         Player player = new Player();
@@ -26,8 +29,9 @@ public class MVP{
         }
         
     }
-public static void main(String[] args){
-    MVP mvp = new MVP();
-    mvp.rewardMVP("Cristiano Ronaldo", 5);
+    public static void main(String[] args){
+    EventPerformer ep = new EventPerformer();
+    ep.selectGameWeek("Game Week 1");
+    ep.rewardMVP("Cristiano Ronaldo", 3);
 }
 }

@@ -8,6 +8,13 @@ public class PenaltySaved extends PenaltyAction {
     PenaltySaved(int newPenaltyValue){
             this.penaltyValue = newPenaltyValue;
         }
+     PenaltySaved(GameWeekBufferedEditor gwbe, int newPenaltyValue){
+         this.gwbe.gameweek = gwbe.gameweek;
+         this.penaltyValue = newPenaltyValue;
+     }
+     PenaltySaved(GameWeekBufferedEditor gwbe){
+        this.gwbe.gameweek = gwbe.gameweek;
+    }
         void savePenalty(String playerName) throws IOException{
             score = penaltyValue;
             gwbe.pointsWriter(playerName, "Total Points: ", score);

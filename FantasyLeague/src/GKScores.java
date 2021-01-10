@@ -7,12 +7,15 @@ import java.util.logging.Logger;
 public class GKScores implements ScoredGoals {
     int score;
     int goalValue = 6;
+     GKScores(GameWeekBufferedEditor gwbe){
+        ScoredGoals.gwbe.gameweek = gwbe.gameweek;
+    }
     @Override
     public void scoreGoals(String playerName, int goals) {
         score = goalValue * goals;
         try {
             gwbe.pointsWriter(playerName, "Total Points: ", score);
-            gwbe.pointsWriter(playerName, "Goals: ", goals);
+            gwbe.pointsWriter(playerName, "Goals Scored: ", goals);
         } catch (IOException ex) {
             Logger.getLogger(MidScores.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -23,13 +26,15 @@ public class GKScores implements ScoredGoals {
         score = goalValue;
         try {
             gwbe.pointsWriter(playerName, "Total Points: ", score);
-            gwbe.pointsWriter(playerName, "Goals: ", 1);
+            gwbe.pointsWriter(playerName, "Goals Scored: ", 1);
         } catch (IOException ex) {
             Logger.getLogger(MidScores.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public static void main(String[] args){
-        GKScores gs = new GKScores();
+        EventPerformer ep = new EventPerformer();
+        ep.selectGameWeek("Game Week 1");
+        GKScores gs = new GKScores(ep.gameWeekBufferedEditor);
         gs.scoreGoal("Cristiano Ronaldo");
     }
     

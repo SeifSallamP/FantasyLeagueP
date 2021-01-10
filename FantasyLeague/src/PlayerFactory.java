@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 
 public class PlayerFactory {
+    GameWeekBufferedEditor gwbe = new GameWeekBufferedEditor();
     String positionParser(String playerName){
         BufferedReader br = null;
         try {
@@ -39,11 +40,11 @@ public class PlayerFactory {
         String textReader = positionParser(playerName);
         CleanSheet cs = null;
         switch(textReader){
-            case "1": cs = new GKCleanSheet();
+            case "1": cs = new GKCleanSheet(gwbe);
                       break;
-            case "2": cs = new DEFCleanSheet();
+            case "2": cs = new DEFCleanSheet(gwbe);
                       break;
-            case "3": cs = new MidCleanSheet();
+            case "3": cs = new MidCleanSheet(gwbe);
                       break; 
         }
         return cs;
@@ -52,19 +53,32 @@ public class PlayerFactory {
            String textReader = positionParser(playerName);
            ScoredGoals sg = null;
            switch (textReader){
-               case "1": sg = new GKScores();
+               case "1": sg = new GKScores(gwbe);
                          break;
                case "2":
-                          sg = new DEFScores();
+                          sg = new DEFScores(gwbe);
                           break;
                case "3": 
-                          sg = new MidScores();
+                          sg = new MidScores(gwbe);
                           break;
                case "4": 
-                          sg = new AttScores();
+                          sg = new AttScores(gwbe);
                           break;
            }
         return sg; 
+    }
+    GoalsConceded createConcededGoals(String playerName){
+        String textReader = positionParser(playerName);
+        GoalsConceded gc = null;
+        switch (textReader){
+            case "1": gc = new GoalsConcededGK(gwbe); break;
+            case "2": gc = new GoalsConcededDEF(gwbe); break;
+            default: gc = null; break;
+        }
+        return gc;
+    }
+    void setGameWeekBufferedEditor(GameWeekBufferedEditor gwbe){
+        this.gwbe = gwbe;
     }
     
     
