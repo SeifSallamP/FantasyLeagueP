@@ -7,7 +7,10 @@ import java.util.logging.Logger;
 public class GoalAssists {
     int score;
     int assistValue = 3;
-    GameWeekBufferedEditor gwbe = new GameWeekBufferedEditor();
+    GameWeekBufferedEditor gwbe=new GameWeekBufferedEditor();
+    GoalAssists(GameWeekBufferedEditor gwbe){
+        this.gwbe.gameweek = gwbe.gameweek;
+    }
     void assistedGoal(String playerName){
         score = assistValue;
         try {
@@ -25,8 +28,5 @@ public class GoalAssists {
             Logger.getLogger(GoalAssists.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-public static void main(String[] args){
-    GoalAssists ga = new GoalAssists();
-    ga.assistGoal("Cristiano Ronaldo", 2);
-}
+
 }

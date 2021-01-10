@@ -29,7 +29,5 @@ public class SavedShots {
             Logger.getLogger(SavedShots.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args){
-        
-    }
+
 }

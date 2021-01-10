@@ -29,14 +29,4 @@ public class AttScores implements ScoredGoals {
             Logger.getLogger(MidScores.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args){
-        EventPerformer ep = new EventPerformer();
-        ep.selectGameWeek("Game Week 1");
-        ep.scoreGoal("Bango");
-//        GameWeekController gm = new GameWeekController();
-//        gm.selectGameWeek("Game Week 1");
-//        GameWeekBufferedEditor gwbe = new GameWeekBufferedEditor(gm);
-//        AttScores as = new AttScores(gwbe);
-//        as.scoreGoal("Cristiano Ronaldo");
-    }
 }

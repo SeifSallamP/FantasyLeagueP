@@ -18,9 +18,5 @@ public class RedCardAction implements CardsActions {
             Logger.getLogger(RedCardAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-public static void main(String[] args){
-    EventPerformer ep = new EventPerformer();
-    ep.selectGameWeek("Game Week 1");
-    ep.giveRedCard("Cristiano Ronaldo");
-}   
+
 }

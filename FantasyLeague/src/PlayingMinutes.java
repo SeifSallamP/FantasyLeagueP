@@ -27,9 +27,4 @@ public class PlayingMinutes {
             Logger.getLogger(PlayingMinutes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args){
-        EventPerformer ep = new EventPerformer();
-        ep.selectGameWeek("Game Week 1");
-        ep.playMoreThan_60Minutes("Bango");
-    }
 }

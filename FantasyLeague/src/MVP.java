@@ -11,14 +11,7 @@ public class MVP{
      MVP(GameWeekBufferedEditor gwbe){
         this.gwbe.gameweek = gwbe.gameweek;
     }
-    /*
-    Player selectMVP(String playerName){
-        Player player = new Player();
-        return player;
-    }
-    void rewardMVP(Player player, int playerPoints, int bonus){
-        score = bp.addBonus(playerPoints, bonus);
-    }*/
+
     void rewardMVP(String playerName, int bonus){
         score = bp.addBonus(bonus);
         try {

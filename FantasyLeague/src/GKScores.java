@@ -31,11 +31,5 @@ public class GKScores implements ScoredGoals {
             Logger.getLogger(MidScores.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args){
-        EventPerformer ep = new EventPerformer();
-        ep.selectGameWeek("Game Week 1");
-        GKScores gs = new GKScores(ep.gameWeekBufferedEditor);
-        gs.scoreGoal("Cristiano Ronaldo");
-    }
     
 }

@@ -23,27 +23,22 @@ public class Login {
            	if (lineCount==1)
         	{   
         		email=input.skip(Pattern.compile(".+: ")).nextLine();
-                       // System.out.println(email);
         	}
                 else if(lineCount==2)
                         {
         		password=input.skip(Pattern.compile(".+: ")).nextLine();
-                        //System.out.println(password);
         	}
         	else if (lineCount == 3)
         	{
         		firstName=input.skip(Pattern.compile(".+: ")).nextLine();
-                        //System.out.println(firstName);
         	}
         	else if (lineCount == 4)
         	{
         		lastName=input.skip(Pattern.compile(".+: ")).nextLine();
-                        //System.out.println(lastName);
         	}
         	else if (lineCount==5)
         	{
         		favClub=input.skip(Pattern.compile(".+: ")).nextLine();
-                        //System.out.println(favClub);
         	}
                 else if (lineCount == 6){
                     userType = input.skip(Pattern.compile(".+: ")).nextLine();
@@ -57,8 +52,6 @@ public class Login {
         }else{
             return null;
         }
-//        User CurrentUser = new User(firstName,lastName,email,password,favClub);
-//        return CurrentUser;
     }
     
     

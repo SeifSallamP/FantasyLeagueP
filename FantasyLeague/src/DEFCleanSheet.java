@@ -21,10 +21,5 @@ public class DEFCleanSheet implements CleanSheet {
         }
     }
     
-public static void main(String[] args){
-    EventPerformer ep = new EventPerformer();
-    ep.selectGameWeek("Game Week 1");
-    DEFCleanSheet dc = new DEFCleanSheet(ep.gameWeekBufferedEditor);
-    dc.cleanSheet("Cristiano Ronaldo");
-}
+
 }

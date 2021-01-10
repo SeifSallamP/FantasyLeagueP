@@ -18,9 +18,5 @@ public class BonusPoints {
             Logger.getLogger(BonusPoints.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-public static void main(String[] args){
-    EventPerformer ep = new EventPerformer();
-    ep.selectGameWeek("Game Week 1");
-    ep.addBonusPoints("Cristiano Ronaldo", 3);
-}
+
 }
